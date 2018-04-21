@@ -109,7 +109,7 @@ MYSQL_USER = "root"
 MYSQL_PASSWORD = "123456"
 
 # LOG_ENABLED = True
-SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
-SQL_DATE_FORMAT = "%Y-%m-%d"
+SQL_DATETIME_FORMAT = "%Y/%m/%d %H:%M:%S"
+SQL_DATE_FORMAT = "%Y/%m/%d"
 
 # RANDOM_UA_TYPE = "random"

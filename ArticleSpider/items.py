@@ -19,7 +19,7 @@ from ArticleSpider.settings import SQL_DATETIME_FORMAT
 
 def date_convert(value):
     try:
-        create_date = datetime.datetime.strptime(value, "%Y-%m-%d").date()
+        create_date = datetime.datetime.strptime(value, "%Y/%m/%d").date()
     except Exception as e:
         create_date = datetime.datetime.now().date()
 
@@ -66,7 +66,7 @@ class ArticleItemLoader(ItemLoader):
 class JobBoleArticleItem(scrapy.Item):
     title = scrapy.Field()
     create_date = scrapy.Field(
-        input_processor=MapCompose(date_convert),
+        # input_processor=MapCompose(date_convert),
     )
     url = scrapy.Field()
     url_object_id = scrapy.Field()
@@ -98,9 +98,8 @@ class JobBoleArticleItem(scrapy.Item):
         self["crawl_time"] = datetime.datetime.now().strftime(SQL_DATETIME_FORMAT)
         if self["front_image_url"]:
             self["front_image_url"] = self["front_image_url"][0]
-        s = str(self["create_date"]).strip().replace("·", "").strip()
-        self["create_date"] = datetime.datetime.strptime(
-            s, "%Y-%m-%d").date()
+        str = self["create_date"].strip().replace("·", "").strip()
+        self["create_date"] = datetime.datetime.strptime(str, "%Y/%m/%d").date()
         nums = 0
         value = self["praise_nums"]
         match_re = re.match(".*?(\d+).*", value)
